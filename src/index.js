@@ -19,40 +19,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);	
 
 
-firebase.firestore().collection("places").get().then(response => { 
-  let docs = response.docs.map(x => {
-    try {
-    return { 
-         id: x.id, 
-         data: x.data(), 
-         parts:  x.data().parts && x.data().parts.map(part => part.id) 
-  }
-} catch {
-
-}
-return null
-
-}); 
-  console.info("places", docs); 
-});
-
-firebase.firestore().collection("inventory").get().then(response => { 
-  let docs = response.docs.map(x => {
-    try {
-    return { 
-         id: x.id, 
-         data: x.data(), 
-         placeId: x.data().place.id 
-  }
-    } catch {}
-return null
-
-}); 
-  console.info("inventory",docs); 
-});
-
-
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
