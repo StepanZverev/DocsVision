@@ -5,7 +5,7 @@ import classes from "./Hierarchy.css"
 class Hierarchy  extends Component {
     render() {
         return (
-            <div></div>
+            <div className={classes.Hierarchy}></div>
         )
     }
 }
