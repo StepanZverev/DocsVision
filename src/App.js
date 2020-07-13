@@ -69,7 +69,7 @@ class App extends React.Component {
           rootItemsId={this.state.rootItemsId}
           onPlaceClick={this.onPlaceClickHandler}
         />
-        <Store currentRoom={this.state.currentPlace} />
+        <Store currentRoom={this.state.currentPlace} inventory={this.state.inventory}/>
       </div>
     )
   }

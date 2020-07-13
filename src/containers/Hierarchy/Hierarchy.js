@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import classes from "./Hierarchy.css"
-
 import Place from "../../components/Place/Place"
 
 class Hierarchy extends Component {
