@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classes from "./Hierarchy.css"
 import firebase from "firebase"
+import Place from "../../components/Place/Place"
 
 class Hierarchy extends Component {
 
@@ -54,15 +55,13 @@ class Hierarchy extends Component {
 
     renderRootItems = places => {
 
-        console.log(places)
-
         return places.map((item, index) => {
             if (this.state.rootItemsId.indexOf(item.id) !== -1) {
-                return (<ul key={index}>{item.data.name}</ul>)
+
+            return (<ul><Place onPlaceClick={this.props.onPlaceClick} key={index} place={item} placeList={places}/></ul>)
             } else {
                 return null
             }
-
         })
     }
 

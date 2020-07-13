@@ -4,14 +4,27 @@ import Hierarchy from "./containers/Hierarchy/Hierarchy"
 import Store from "./containers/Store/Store"
 
 
-function App() {
+class App extends React.Component {
 
-  return (
-    <div className={classes.App}>
-      <Hierarchy />
-      <Store />
-    </div>
-  );
+  state = {
+    currentPlace: null
+  }
+
+  onPlaceClickHandler = item => {
+    this.setState({
+      currentPlace: item
+    })
+    console.log(item)
+  }
+
+  render() {
+    return (
+      <div className={classes.App}>
+        <Hierarchy onPlaceClick={this.onPlaceClickHandler}/>
+        <Store currentRoom={this.state.currentPlace}/>
+      </div>
+    )
+  }
 }
 
 export default App;

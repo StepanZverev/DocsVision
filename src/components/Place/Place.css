@@ -1,0 +1,10 @@
+.Place {
+    background: white;
+    color: teal;
+    border-radius: 5px;
+}
+
+.Place:hover {
+    background-color: tomato;
+    cursor: pointer;
+}
