@@ -10,11 +10,12 @@ class App extends React.Component {
     currentPlace: null,
     rootItemsId: ['main', 'production'],
     places: [],
-    inventory: []
+    inventory: [],
+    loadingPlaces: true,
+    loadingInventory: true
   }
 
-  componentWillMount() {
-
+  componentDidMount() {
     firebase.firestore().collection("places").get().then(response => {
       let places = response.docs.map(x => {
         try {
@@ -31,8 +32,10 @@ class App extends React.Component {
       });
       console.info("places", places);
       this.setState({
-        places
+        places,
+        loadingPlaces: false
       })
+
     });
 
     firebase.firestore().collection("inventory").get().then(response => {
@@ -45,11 +48,11 @@ class App extends React.Component {
           }
         } catch { }
         return null
-
       });
       console.info("inventory", inventory);
       this.setState({
-        inventory
+        inventory,
+        loadingInventory: false
       })
     });
   }
@@ -61,15 +64,44 @@ class App extends React.Component {
     console.log(item)
   }
 
+  refrechHandler = () => {
+    firebase.firestore().collection("inventory").get().then(response => {
+      let inventory = response.docs.map(x => {
+        try {
+          return {
+            id: x.id,
+            data: x.data(),
+            placeId: x.data().place.id
+          }
+        } catch { }
+        return null
+      })
+
+      console.info("inventory", inventory)
+      this.setState({
+        inventory,
+        loadingInventory: false
+      })
+    })
+  }
+
   render() {
     return (
       <div className={classes.App}>
+
         <Hierarchy
+          loading={this.state.loadingPlaces}
           places={this.state.places}
           rootItemsId={this.state.rootItemsId}
           onPlaceClick={this.onPlaceClickHandler}
         />
-        <Store currentRoom={this.state.currentPlace} inventory={this.state.inventory}/>
+
+        <Store 
+        refresh = {this.refrechHandler}
+        loading={this.state.loadingInventory} 
+        currentRoom={this.state.currentPlace} 
+        inventory={this.state.inventory} 
+        />
       </div>
     )
   }

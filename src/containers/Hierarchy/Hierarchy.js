@@ -19,7 +19,7 @@ class Hierarchy extends Component {
     render() {
         return (
             <div className={classes.Hierarchy}>
-                {this.props.places ? this.renderRootItems(this.props.places) : null}
+                {this.props.loading ? <div>LOADING...</div> :this.renderRootItems(this.props.places)}
             </div>
         )
     }
