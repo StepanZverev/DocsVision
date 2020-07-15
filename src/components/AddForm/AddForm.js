@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import classes from './AddForm.css'
 
 
 function isValid(touched, ...validateParam) {
@@ -57,32 +57,38 @@ class AddForm extends Component {
 
     render() {
         return (
-            <form>
+            <form className={classes.AddForm}>
                 <h3>Добавить оборудование:</h3>
                 <label>
-                    Название
-                <input 
-                    type="text" 
-                    value={this.state.name ? this.state.name : ""} 
-                    onChange={event => this.onChangeHandler(event, true)} 
-                />
+                    Название:
+                    <input 
+                        type="text" 
+                        value={this.state.name ? this.state.name : ""} 
+                        onChange={event => this.onChangeHandler(event, true)} 
+                    />
 
                 </label>
+                <br/>
                 <label>
-                    Колличество
+                    Колличество:
 
-                <input 
-                    type="number" 
-                    value={this.state.count ? this.state.count : ""} 
-                    placeholder={1} 
-                    onChange={event => this.onChangeHandler(event, false)} 
-                />
+                    <input 
+                        type="number" 
+                        value={this.state.count ? this.state.count : ""} 
+                        placeholder={1} 
+                        min={1}
+                        onChange={event => this.onChangeHandler(event, false)} 
+                    />
                 </label>
 
-                <button
+                <br/>
+
+                <button className={isValid(this.state.toched, this.state.isValidName, this.state.isValidCount)? null: classes.disabled}
                     onClick={event => this.clickHandler(event)}
                     disabled={!isValid(this.state.toched, this.state.isValidName, this.state.isValidCount)}
-                >Add</button>
+                >
+                    <i className={"fa fa-plus"}/> Добавить
+                </button>
 
             </form>
         )

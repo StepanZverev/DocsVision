@@ -75,13 +75,21 @@ class Store extends Component {
     render() {
         return (
             <div className={classes.Store} >
-                {this.props.currentRoom ? <h2>{this.props.currentRoom.data.name}</h2> : <h2>Выберите комнату</h2>}
-
-                <Table data={this.state.tableData} onDeleteClick={this.deleteClickHandler} />
-
-                <AddForm onAddItem={this.addItemHandler}/>
-
-                {this.state.loading ? <div>LOADING....</div> : null}
+                <div className={classes.title}>Оборудование</div>
+                <div className={classes.container}>
+                    {this.props.currentRoom ?
+                        this.props.currentRoom.parts ?
+                            [
+                                <h2>{this.props.currentRoom.data.name}</h2>,
+                                <Table data={this.state.tableData} onDeleteClick={this.deleteClickHandler} />
+                            ] :
+                            [
+                                <h2>{this.props.currentRoom.data.name}</h2>,
+                                <Table data={this.state.tableData} onDeleteClick={this.deleteClickHandler} />,
+                                <AddForm onAddItem={this.addItemHandler} />
+                            ] :
+                        <h2>Выберите комнату</h2>}
+                </div>
             </div >
         )
     }

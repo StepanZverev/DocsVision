@@ -9,7 +9,15 @@ class Hierarchy extends Component {
         return places.map((item, index) => {
             if (this.props.rootItemsId.indexOf(item.id) !== -1) {
 
-            return (<ul><Place onPlaceClick={this.props.onPlaceClick} key={index} place={item} placeList={places}/></ul>)
+                return (<ul>
+                    <Place
+                        key={index}
+                        onPlaceClick={this.props.onPlaceClick}
+                        isRootPlace={true}
+                        place={item}
+                        placeList={places}
+                    />
+                </ul>)
             } else {
                 return null
             }
@@ -19,7 +27,10 @@ class Hierarchy extends Component {
     render() {
         return (
             <div className={classes.Hierarchy}>
-                {this.props.loading ? <div>LOADING...</div> :this.renderRootItems(this.props.places)}
+                <div className={classes.title}>Структура компании</div>
+                <div className={classes.container}>
+                    {this.props.loading ? <div>LOADING...</div> : this.renderRootItems(this.props.places)}
+                </div>
             </div>
         )
     }

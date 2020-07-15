@@ -1,0 +1,59 @@
+.AddForm {
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    
+}
+
+.AddForm h3 {
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.AddForm input {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+label:nth-of-type(1) input{
+    width: 250px;
+}
+
+label:nth-of-type(2) input{
+    width: 50px;
+}
+
+.AddForm input {
+    border-radius: 5px;
+    padding: 5px;
+    border: 2px solid rgb(33, 95, 97);
+}
+
+.invalid {
+
+}
+
+.AddForm button{
+    background-color: green;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    padding: 3px 7px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.AddForm button:hover{
+    background-color: darkgreen;
+}
+
+.AddForm button.disabled{
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.AddForm button:not(.disabled):hover{
+    background-color: darkgreen;
+}

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import classes from './Table'
-import firebase from 'firebase'
+import classes from './Table.css'
 
 class Table extends Component {
 
@@ -16,7 +15,7 @@ class Table extends Component {
 
     render() {
         return (
-            <table>
+            <table className={classes.Table}>
                 <tr>
                     <th>№</th>
                     <th>Наименование</th>
@@ -27,10 +26,10 @@ class Table extends Component {
                 {this.props.data.map((item, index) => {
                 return (
                 <tr key={index}>
-                    <td>{index + 1}</td>
+                    <td>{index + 1}.</td>
                     <td>{item.name}</td>
                     <td>{item.count}</td>
-                    <td><button onClick={() => this.props.onDeleteClick(index)}>Delete</button></td>
+                    <td><button onClick={() => this.props.onDeleteClick(index)}><i className={"fa fa-trash-alt"}/></button></td>
                 </tr>
                 )
             })}

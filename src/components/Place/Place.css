@@ -1,10 +1,17 @@
 .Place {
-    background: white;
-    color: teal;
+    color: white;
     border-radius: 5px;
 }
 
-.Place:hover {
-    background-color: tomato;
+span {
+    margin-left: 10px;
+    padding: 2px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in;
+}
+
+span:hover {
+    background-color: rgba(0, 0, 0, 0.281);
     cursor: pointer;
+    text-decoration: underline;
 }
