@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classes from "./Hierarchy.css"
 import Place from "../../components/Place/Place"
+import Loader from "../../components/Loader/Loader"
 
 class Hierarchy extends Component {
 
@@ -29,7 +30,7 @@ class Hierarchy extends Component {
             <div className={classes.Hierarchy}>
                 <div className={classes.title}>Структура компании</div>
                 <div className={classes.container}>
-                    {this.props.loading ? <div>LOADING...</div> : this.renderRootItems(this.props.places)}
+                    {this.props.loading ? <Loader/> : this.renderRootItems(this.props.places)}
                 </div>
             </div>
         )
