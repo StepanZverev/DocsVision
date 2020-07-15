@@ -4,12 +4,14 @@ import Place from "../../components/Place/Place"
 
 class Hierarchy extends Component {
 
+
     renderRootItems = places => {
 
         return places.map((item, index) => {
             if (this.props.rootItemsId.indexOf(item.id) !== -1) {
                 return (<ul key={index}>
                     <Place
+                        currentRoom={this.props.currentRoom} 
                         onPlaceClick={this.props.onPlaceClick}
                         isRootPlace={true}
                         place={item}

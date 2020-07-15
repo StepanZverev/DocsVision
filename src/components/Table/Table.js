@@ -31,7 +31,9 @@ class Table extends Component {
                             <td>{item.count}</td>
                             {this.props.isLastChild
                                 ?
-                                <td><button onClick={() => this.props.onDeleteClick(index)}><i className={"fa fa-trash-alt"} /></button></td>
+                                <td><button className={classes.delete} onClick={() => this.props.onDeleteClick(index)}><i className={"fa fa-trash-alt"} /></button>
+                                <button className={classes.edit} onClick={() => this.props.onEditClick(index)}><i className={"fa fa-pencil-alt"} /></button>
+                                </td>
                                 :
                                 null
                             }

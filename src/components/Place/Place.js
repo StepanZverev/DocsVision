@@ -17,7 +17,7 @@ const Place = props => {
         return (
             <li className={classes.Place}>
                 <ul>
-                    {renderIcon(props.isRootPlace)}
+                    {renderIcon(props.isRootPlace,  props.currentRoom === props.place, classes.active)}
                     <span onClick={() => props.onPlaceClick(props.place)}>{props.place.data.name}</span>
 
                     {children.map((child,index) =>
@@ -27,6 +27,7 @@ const Place = props => {
                             place={child}
                             isRootPlace={false}
                             placeList={props.placeList}
+                            currentRoom={props.currentRoom}
                         />)}
 
                 </ul>
@@ -35,14 +36,19 @@ const Place = props => {
 
     } else {
         return (<li className={classes.Place} >
-            <i className={"fa fa-level-up-alt"} style={{ transform: "rotate(90deg)" }} />
+            {renderIcon(props.isRootPlace, props.currentRoom === props.place, classes.active)}
             <span onClick={() => props.onPlaceClick(props.place)}>{props.place.data.name}</span>
         </li>)
     }
 }
 
-function renderIcon(isRoot) {
+function renderIcon(isRoot, isActive, activeClass) {
+
     const cls = ["fa"]
+
+    if (isActive) {
+        cls.push(activeClass)
+    }
 
     let style = {}
 

@@ -15,18 +15,34 @@ th,td {
 
 th:last-child,td:last-child {
     width: 0;
+    white-space: nowrap;
 }
 
 .Table button {
-    background-color: red;
     border: 2px solid rgba(0, 0, 0, 0.5);
+    width: 30px;
+    text-align: center;
     border-radius: 3px;
     padding: 3px;
     color: white;
     cursor: pointer;
+    display: inline-block;
 }
 
-.Table button:hover {
+button.delete{
+    background-color: red;
+    margin-right: 5px;
+}
+
+button.edit {
+    background-color: blue;
+}
+
+.Table button.delete:hover {
     background-color: darkred;
+}
+
+.Table button.edit:hover {
+    background-color: darkblue;
 }
 

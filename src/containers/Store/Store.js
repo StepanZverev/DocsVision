@@ -23,7 +23,7 @@ class Store extends Component {
 
             console.log("children", this.getAllChildrenId(nextProps.currentRoom));
 
-
+            
             nextProps.inventory.forEach((inventoryItem) => {
                 if (this.getAllChildrenId(nextProps.currentRoom).indexOf(inventoryItem.placeId) !== -1) {
                     tableData.push({
@@ -61,23 +61,26 @@ class Store extends Component {
 
     deleteClickHandler = (index) => {
 
-        this.setState({
-            loading: true
-        })
-
         const id = this.state.tableData[index].id
 
         if (id) {
             firebase.firestore().collection("inventory").doc(id).delete().then(() => {
                 console.info("Done");
                 this.props.refresh()
-                this.setState({
-                    loading: false
-                })
             });
         }
-
     }
+
+    // editClickHandler = (index) => {
+    //     const id = this.state.tableData[index].id
+
+    //     firebase.firestore().collection("inventory").doc(id).set({ 
+    //         count: 99
+    //     }).then(() => {
+    //         console.info("Done");
+    //     });
+        
+    // }
 
     addItemHandler = (event, itemName, itemCount) => {
         event.preventDefault()
@@ -113,6 +116,7 @@ class Store extends Component {
                                 <Table
                                     data={this.state.tableData}
                                     onDeleteClick={this.deleteClickHandler}
+                                    onEditClick={this.editClickHandler}
                                     isLastChild={true}
                                 />,
                                 <AddForm onAddItem={this.addItemHandler} />

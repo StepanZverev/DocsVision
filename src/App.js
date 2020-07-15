@@ -51,7 +51,7 @@ class App extends React.Component {
       });
       console.info("inventory", inventory);
       this.setState({
-        inventory,
+        inventory: inventory.filter(element => element !== null),
         loadingInventory: false
       })
     });
@@ -79,7 +79,7 @@ class App extends React.Component {
 
       console.info("inventory", inventory)
       this.setState({
-        inventory,
+        inventory: inventory.filter(element => element !== null),
         loadingInventory: false
       })
     })
@@ -93,17 +93,18 @@ class App extends React.Component {
           loading={this.state.loadingPlaces}
           places={this.state.places}
           rootItemsId={this.state.rootItemsId}
-          
+          currentRoom={this.state.currentPlace}
+
           onPlaceClick={this.onPlaceClickHandler}
         />
 
-        <Store 
-        places={this.state.places}
-        inventory={this.state.inventory} 
-        loading={this.state.loadingInventory} 
-        currentRoom={this.state.currentPlace} 
+        <Store
+          places={this.state.places}
+          inventory={this.state.inventory}
+          loading={this.state.loadingInventory}
+          currentRoom={this.state.currentPlace}
 
-        refresh = {this.refrechHandler}
+          refresh={this.refrechHandler}
         />
       </div>
     )
