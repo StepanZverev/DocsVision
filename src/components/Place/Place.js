@@ -20,8 +20,9 @@ const Place = props => {
                     {renderIcon(props.isRootPlace)}
                     <span onClick={() => props.onPlaceClick(props.place)}>{props.place.data.name}</span>
 
-                    {children.map(child =>
+                    {children.map((child,index) =>
                         <Place
+                            key={index}
                             onPlaceClick={props.onPlaceClick}
                             place={child}
                             isRootPlace={false}

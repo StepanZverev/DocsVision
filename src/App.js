@@ -93,14 +93,17 @@ class App extends React.Component {
           loading={this.state.loadingPlaces}
           places={this.state.places}
           rootItemsId={this.state.rootItemsId}
+          
           onPlaceClick={this.onPlaceClickHandler}
         />
 
         <Store 
-        refresh = {this.refrechHandler}
+        places={this.state.places}
+        inventory={this.state.inventory} 
         loading={this.state.loadingInventory} 
         currentRoom={this.state.currentPlace} 
-        inventory={this.state.inventory} 
+
+        refresh = {this.refrechHandler}
         />
       </div>
     )

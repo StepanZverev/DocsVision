@@ -17,12 +17,15 @@ class Store extends Component {
 
     componentWillReceiveProps(nextProps) {
 
-        if (nextProps.currentRoom) {
+        if (nextProps.currentRoom) {  // Если выбрано помещение
 
             const tableData = []
 
+            console.log("children", this.getAllChildrenId(nextProps.currentRoom));
+
+
             nextProps.inventory.forEach((inventoryItem) => {
-                if (inventoryItem.placeId === nextProps.currentRoom.id) {
+                if (this.getAllChildrenId(nextProps.currentRoom).indexOf(inventoryItem.placeId) !== -1) {
                     tableData.push({
                         name: inventoryItem.data.name,
                         count: inventoryItem.data.count,
@@ -36,6 +39,24 @@ class Store extends Component {
             })
 
         }
+    }
+
+    getAllChildrenId = (place) => {
+
+        const places = this.props.places
+
+        const result = [place.id]
+
+        if (!place.parts) {
+            return result
+        } else {
+            places.forEach(item => {
+                if (place.parts.indexOf(item.id) !== -1) {
+                    result.push(...this.getAllChildrenId(item))
+                }
+            })
+        }
+        return result
     }
 
     deleteClickHandler = (index) => {
@@ -81,11 +102,19 @@ class Store extends Component {
                         this.props.currentRoom.parts ?
                             [
                                 <h2>{this.props.currentRoom.data.name}</h2>,
-                                <Table data={this.state.tableData} onDeleteClick={this.deleteClickHandler} />
+                                <Table
+                                    data={this.state.tableData}
+                                    onDeleteClick={this.deleteClickHandler}
+                                    isLastChild={false}
+                                />
                             ] :
                             [
                                 <h2>{this.props.currentRoom.data.name}</h2>,
-                                <Table data={this.state.tableData} onDeleteClick={this.deleteClickHandler} />,
+                                <Table
+                                    data={this.state.tableData}
+                                    onDeleteClick={this.deleteClickHandler}
+                                    isLastChild={true}
+                                />,
                                 <AddForm onAddItem={this.addItemHandler} />
                             ] :
                         <h2>Выберите комнату</h2>}

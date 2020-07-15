@@ -2,11 +2,10 @@
     background-color: white;
     border-radius: 5px;
     padding: 10px;
-    
+    color : rgb(43,138,141);
 }
 
 .AddForm h3 {
-    color: black;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -17,22 +16,23 @@
     margin-left: 20px;
 }
 
+.AddForm label {
+
+    font-weight: bold;
+}
+
 label:nth-of-type(1) input{
     width: 250px;
 }
 
 label:nth-of-type(2) input{
-    width: 50px;
+    width: 60px;
 }
 
 .AddForm input {
     border-radius: 5px;
     padding: 5px;
     border: 2px solid rgb(33, 95, 97);
-}
-
-.invalid {
-
 }
 
 .AddForm button{

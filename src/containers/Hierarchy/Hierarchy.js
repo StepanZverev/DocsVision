@@ -8,10 +8,8 @@ class Hierarchy extends Component {
 
         return places.map((item, index) => {
             if (this.props.rootItemsId.indexOf(item.id) !== -1) {
-
-                return (<ul>
+                return (<ul key={index}>
                     <Place
-                        key={index}
                         onPlaceClick={this.props.onPlaceClick}
                         isRootPlace={true}
                         place={item}
