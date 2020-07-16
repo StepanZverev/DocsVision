@@ -5,13 +5,12 @@ import Loader from "../../components/Loader/Loader"
 
 class Hierarchy extends Component {
 
-
-    renderRootItems = places => {
+    renderRootItems = places => {        // Рендер коневых помещений (main, production)
 
         return places.map((item, index) => {
             if (this.props.rootItemsId.indexOf(item.id) !== -1) {
                 return (<ul key={index}>
-                    <Place
+                    <Place                                    //Компенент комнаты
                         currentRoom={this.props.currentRoom} 
                         onPlaceClick={this.props.onPlaceClick}
                         isRootPlace={true}
@@ -30,7 +29,8 @@ class Hierarchy extends Component {
             <div className={classes.Hierarchy}>
                 <div className={classes.title}>Структура компании</div>
                 <div className={classes.container}>
-                    {this.props.loading ? <Loader/> : this.renderRootItems(this.props.places)}
+                    {this.props.loading ? <Loader/> : this.renderRootItems(this.props.places)}        
+                                     {/* Loader - компонет загрузки */}
                 </div>
             </div>
         )

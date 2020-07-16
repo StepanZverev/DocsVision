@@ -7,15 +7,15 @@ import firebase from "firebase"
 class App extends React.Component {
 
   state = {
-    currentPlace: null,
-    rootItemsId: ['main', 'production'],
-    places: [],
-    inventory: [],
-    loadingPlaces: true,
-    loadingInventory: true
+    currentPlace: null,                          // Текущая комната
+    rootItemsId: ['main', 'production'],         // ID корневых комнат
+    places: [],                                  // массив комнат, загруженный с сервера
+    inventory: [],                               // массив оборудования, загруженный с сервера
+    loadingPlaces: true,                         // Загрузились ли комнаты 
+    loadingInventory: true                       // Загрузилось ли оборудование
   }
 
-  componentDidMount() {
+  componentDidMount() {       // Загрузка данных
     firebase.firestore().collection("places").get().then(response => {
       let places = response.docs.map(x => {
         try {
@@ -24,19 +24,18 @@ class App extends React.Component {
             data: x.data(),
             parts: x.data().parts && x.data().parts.map(part => part.id)
           }
-        } catch {
 
+        } catch (e){
+          console.log(e);
+          return null
         }
-        return null
+      })
 
-      });
-      console.info("places", places);
       this.setState({
         places,
         loadingPlaces: false
       })
-
-    });
+    })
 
     firebase.firestore().collection("inventory").get().then(response => {
       let inventory = response.docs.map(x => {
@@ -46,10 +45,13 @@ class App extends React.Component {
             data: x.data(),
             placeId: x.data().place.id
           }
-        } catch { }
-        return null
-      });
-      console.info("inventory", inventory);
+
+        } catch (e) {
+          console.log(e);
+          return null
+        }
+      })
+
       this.setState({
         inventory: inventory.filter(element => element !== null),
         loadingInventory: false
@@ -57,14 +59,13 @@ class App extends React.Component {
     });
   }
 
-  onPlaceClickHandler = item => {
+  onPlaceClickHandler = item => {     // Обработка клика по комнате
     this.setState({
       currentPlace: item
     })
-    console.log(item)
   }
 
-  refrechHandler = () => {
+  refreshHandler = () => {                      // Обновить данные с сервера 
     firebase.firestore().collection("inventory").get().then(response => {
       let inventory = response.docs.map(x => {
         try {
@@ -73,11 +74,11 @@ class App extends React.Component {
             data: x.data(),
             placeId: x.data().place.id
           }
-        } catch { }
-        return null
+        } catch(e) { 
+          console.log(e) 
+          return null
+        }
       })
-
-      console.info("inventory", inventory)
       this.setState({
         inventory: inventory.filter(element => element !== null),
         loadingInventory: false
@@ -89,8 +90,8 @@ class App extends React.Component {
     return (
       <div className={classes.App}>
 
-        <Hierarchy
-          loading={this.state.loadingPlaces}
+        <Hierarchy                                          // Окно вывода иерархии помещений
+          loading={this.state.loadingPlaces && this.state.loadingPlaces}
           places={this.state.places}
           rootItemsId={this.state.rootItemsId}
           currentRoom={this.state.currentPlace}
@@ -98,13 +99,13 @@ class App extends React.Component {
           onPlaceClick={this.onPlaceClickHandler}
         />
 
-        <Store
+        <Store                                          // Окно вывода и редактирования оборудования
           places={this.state.places}
           inventory={this.state.inventory}
           loading={this.state.loadingInventory}
           currentRoom={this.state.currentPlace}
 
-          refresh={this.refrechHandler}
+          refresh={this.refreshHandler}
         />
       </div>
     )

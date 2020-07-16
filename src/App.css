@@ -1,5 +1,5 @@
 .App {
     background: rgb(62, 198, 202);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
 }

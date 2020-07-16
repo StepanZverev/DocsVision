@@ -1,22 +1,22 @@
-.AddForm {
+.Form {
     background-color: white;
     border-radius: 5px;
     padding: 10px;
     color : rgb(43,138,141);
 }
 
-.AddForm h3 {
+.Form h3 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.AddForm input {
+.Form input {
     display: inline-block;
     margin-bottom: 10px;
     margin-left: 20px;
 }
 
-.AddForm label {
+.Form label {
 
     font-weight: bold;
 }
@@ -29,13 +29,13 @@ label:nth-of-type(2) input{
     width: 60px;
 }
 
-.AddForm input {
+.Form input {
     border-radius: 5px;
     padding: 5px;
     border: 2px solid rgb(33, 95, 97);
 }
 
-.AddForm button{
+.Form button{
     background-color: green;
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 3px;
@@ -45,15 +45,16 @@ label:nth-of-type(2) input{
     font-weight: bold;
 }
 
-.AddForm button:hover{
-    background-color: darkgreen;
-}
-
-.AddForm button.disabled{
+.Form button.disabled{
     background-color: grey;
     cursor: not-allowed;
 }
 
-.AddForm button:not(.disabled):hover{
-    background-color: darkgreen;
+.Form button:not(.disabled):hover{
+    box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+button.cancel {
+    margin-left: 20px;
+    background-color: rgb(202, 74, 74);
 }

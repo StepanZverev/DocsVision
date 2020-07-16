@@ -4,23 +4,24 @@ import classes from './Place.css'
 
 const Place = props => {
 
-    if (props.place.parts) {
+    if (props.place.parts) {   //Если у текущего помещения есть дочерние
 
-        const children = []
+        const children = []       
 
-        props.placeList.forEach(placeItem => {
+        props.placeList.forEach(placeItem => {       // Находим все дочерние помещения и добавляем в массив
             if (props.place.parts.indexOf(placeItem.id) !== -1) {
                 children.push(placeItem)
             }
-        });
+        })
 
         return (
             <li className={classes.Place}>
                 <ul>
                     {renderIcon(props.isRootPlace,  props.currentRoom === props.place, classes.active)}
+
                     <span onClick={() => props.onPlaceClick(props.place)}>{props.place.data.name}</span>
 
-                    {children.map((child,index) =>
+                    {children.map((child,index) =>          // Рендер дочерних комнат
                         <Place
                             key={index}
                             onPlaceClick={props.onPlaceClick}
@@ -34,35 +35,34 @@ const Place = props => {
             </li>
         )
 
-    } else {
+    } else {    // Если дочерних нет
         return (<li className={classes.Place} >
+
             {renderIcon(props.isRootPlace, props.currentRoom === props.place, classes.active)}
+
             <span onClick={() => props.onPlaceClick(props.place)}>{props.place.data.name}</span>
         </li>)
     }
 }
 
-function renderIcon(isRoot, isActive, activeClass) {
+function renderIcon(isRoot, isActive, activeClass) {   // Рендер иконки слева от названия комнаты
 
-    const cls = ["fa"]
+    const cls = ["fa"]              // Массив классов
 
-    if (isActive) {
+    if (isActive) {                 // Если комната активна
         cls.push(activeClass)
     }
 
     let style = {}
 
-    if (isRoot) {
-        
+    if (isRoot) {               // Если комната корневая
         cls.push("fa-home")
-
     } else {
         cls.push("fa-level-up-alt")
         style = {
             transform: "rotate(90deg)" 
         }
     }
-    
 
     return (
         <i className={cls.join(" ")} style={style} />
